@@ -43,3 +43,24 @@ def actualizar_persona(id):
         return jsonify({'message': 'Persona actualizada exitosamente'})
     else:
         return jsonify({'message': 'Persona no encontrada'}), 404
+
+
+@app.route('/persona/<int:id>', methods=['DELETE'])
+def eliminar_persona(id):
+    persona = Persona.query.get(id)
+    if persona:
+        db.session.delete(persona)
+        db.session.commit()
+        return jsonify({'message': 'Persona eliminada exitosamente'})
+    else:
+        return jsonify({'message': 'Persona no encontrada'}), 404
+
+@app.route('/personas', methods=['GET'])
+def obtener_todas_personas():
+    personas = Persona.query.all()
+    personas_json = [{'id': persona.id, 'nombre': persona.nombre, 'dni': persona.dni, 'fecha_nacimiento': str(persona.fecha_nacimiento)} for persona in personas]
+    return jsonify(personas_json)
+
+if __name__ == '__main__':
+    db.create_all()
+    app.run(debug=True)

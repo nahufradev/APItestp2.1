@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import Flask, request, jsonify
-from database.user_repository import UserRepository
+from user_repository import UserRepository
 from flask_sqlalchemy import SQLAlchemy
 from auth import auth_bp
 

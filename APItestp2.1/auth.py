@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from database.user_repository import UserRepository
+from .user_repository import UserRepository
+from auth import auth_bp
 
 auth_bp = Blueprint('auth', __name__)
 user_repo = UserRepository()
